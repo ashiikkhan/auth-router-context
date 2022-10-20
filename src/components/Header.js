@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../contexts/UserContext';
 
 const Header = () => {
+  const { user } = useContext(AuthContext);
+
   return (
     <div>
       <div className='navbar bg-base-100'>
@@ -22,6 +25,7 @@ const Header = () => {
               <Link to='/register'>Register</Link>
             </li>
           </ul>
+          {user?.email && <p>{user.email}</p>}
         </div>
       </div>
     </div>
