@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../contexts/UserContext';
 
 const Login = () => {
+  //get sing in function from context:
+  const { signIn } = useContext(AuthContext);
   //handle form onSubmit
   const handleLoginSubmit = (event) => {
     event.preventDefault();
@@ -9,7 +12,17 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
 
-    console.log(email, password);
+    signIn(email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(userCredential);
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+      });
   };
   return (
     <div className='md:w-2/3  mx-auto'>

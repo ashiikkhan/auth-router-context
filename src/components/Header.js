@@ -6,8 +6,8 @@ const Header = () => {
     <div>
       <div className='navbar bg-base-100'>
         <div className='flex-1'>
-          <Link to='/' className='btn btn-ghost normal-case text-xl'>
-            authUI
+          <Link to='/' className='btn btn-ghost normal-case text-3xl font-bold'>
+            <span className='text-primary'>auth</span>UI
           </Link>
         </div>
         <div className='flex-none'>

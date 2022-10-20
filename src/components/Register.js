@@ -1,17 +1,31 @@
-import React from 'react';
+// import { Result } from 'postcss';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../contexts/UserContext';
 
 const Register = () => {
+  //destructure createUser function by using useContext hook:
+  const { createUser } = useContext(AuthContext);
+
   //handle form onSubmit
   const handleRegisterSubmit = (event) => {
     event.preventDefault();
     //get form , email , pass
     const form = event.target;
-    const name = form.name.value;
+    // const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
 
-    console.log(name, email, password);
+    createUser(email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+      });
   };
   return (
     <div className='md:w-2/3  mx-auto'>
