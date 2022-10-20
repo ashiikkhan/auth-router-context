@@ -5,7 +5,7 @@ import { AuthContext } from '../contexts/UserContext';
 
 const Register = () => {
   //destructure createUser function by using useContext hook:
-  const { createUser } = useContext(AuthContext);
+  const { createUser, signInWithGoogle } = useContext(AuthContext);
 
   //handle form onSubmit
   const handleRegisterSubmit = (event) => {
@@ -28,6 +28,17 @@ const Register = () => {
         console.log(errorCode, errorMessage);
       });
   };
+
+  const handleGoogleSignIn = () => {
+    signInWithGoogle()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div className='md:w-2/3  mx-auto'>
       <div className='hero min-h-screen bg-base-100'>
@@ -40,7 +51,7 @@ const Register = () => {
             </p>
           </div>
           <div className='card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100'>
-            <form onSubmit={handleRegisterSubmit} className='card-body'>
+            <form onSubmit={handleRegisterSubmit} className='card-body pb-4'>
               <div className='form-control'>
                 <label className='label'>
                   <span className='label-text'>Name</span>
@@ -86,6 +97,14 @@ const Register = () => {
                 <button className='btn btn-primary'>Register</button>
               </div>
             </form>
+            <p>OR</p>
+            <div className='card-body  pt-4'>
+              <button
+                onClick={handleGoogleSignIn}
+                className='btn btn-outline btn-success'>
+                Sign in with Google
+              </button>
+            </div>
           </div>
         </div>
       </div>

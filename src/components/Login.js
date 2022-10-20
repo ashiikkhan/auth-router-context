@@ -1,9 +1,12 @@
 import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/UserContext';
 
 const Login = () => {
   //get sing in function from context:
   const { signIn } = useContext(AuthContext);
+
+  const navigate = useNavigate();
   //handle form onSubmit
   const handleLoginSubmit = (event) => {
     event.preventDefault();
@@ -16,6 +19,7 @@ const Login = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         form.reset();
+        navigate('/');
       })
       .catch((error) => {
         const errorCode = error.code;
